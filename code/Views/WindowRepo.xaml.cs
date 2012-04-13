@@ -16,9 +16,9 @@ namespace WinGit.Views
     /// <summary>
     /// Interaction logic for WindowGitRepo.xaml
     /// </summary>
-    public partial class WindowGitRepo : Window
+    public partial class WindowRepo : Window
     {
-        public WindowGitRepo()
+        public WindowRepo()
         {
             InitializeComponent();
         }

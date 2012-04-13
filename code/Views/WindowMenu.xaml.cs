@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WinGit
+namespace WinGit.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -22,6 +22,12 @@ namespace WinGit
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ButtonOpenRecentRepo1_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+        	WindowRepo win = new WindowRepo();
+			WindowRepo.Show();
         }
     }
 }
