@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\ViewModelGit.cs" />
+    <Compile Include="ViewModels\ViewModelRepo.cs" />
     <Compile Include="Views\WindowRepo.xaml.cs">
       <DependentUpon>WindowRepo.xaml</DependentUpon>
     </Compile>
