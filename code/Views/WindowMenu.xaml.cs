@@ -27,7 +27,7 @@ namespace WinGit.Views
         private void ButtonOpenRecentRepo1_Click(object sender, System.Windows.RoutedEventArgs e)
         {
         	WindowRepo win = new WindowRepo();
-			WindowRepo.Show();
+			win.Show();
         }
     }
 }
