@@ -1,16 +1,8 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" 
-        x:Class="WinGit.Views.MainWindow"
-        Title="WinGit" Height="400" Width="600" 
-        WindowStartupLocation="CenterScreen" 
-        FontSize="18.667" 
-        SizeToContent="Height" 
-        ResizeMode="NoResize">
-    
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WinGit.Views.MainWindow"
+        Title="WinGit" Height="400" Width="600" WindowStartupLocation="CenterScreen" FontSize="18.667" SizeToContent="Height" ResizeMode="NoResize">
 	<DockPanel Margin="5">
 		<Expander x:Name="ExpanderOpenRepo" Header="Open" Cursor="Hand" Background="{DynamicResource BrushLightGray}" BorderBrush="{DynamicResource BrushMediumGray}" Foreground="Black" FontSize="16" Padding="5" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="5">
 			<Grid Background="White">
