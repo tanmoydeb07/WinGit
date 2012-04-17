@@ -1,11 +1,29 @@
 ﻿<Window
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="WinGit.WindowRepoT1"
-        Title="WinGit - MySecretProject Repo" Height="600" Width="800">
+        xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
+        xmlns:WinGit="clr-namespace:WinGit.Views.Theme_1"
+        x:Class="WinGit.WindowRepoT1"
+        Title="WinGit - MySecretProject Repo" Width="1000" Height="750" >
 	<Window.Resources>
 
-		<Style x:Key="ButtonFocusVisual">
+        <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#F3F3F3" Offset="0"/>
+            <GradientStop Color="#EBEBEB" Offset="0.5"/>
+            <GradientStop Color="#DDDDDD" Offset="0.5"/>
+            <GradientStop Color="#CDCDCD" Offset="1"/>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+
+        <SolidColorBrush x:Key="BrushRoyalBlue" Color="#FF3356B1"/>
+
+        <RadialGradientBrush x:Key="BrushRoyalBlueGrayRadialGradient" Center="0.508,0.941" GradientOrigin="0.508,0.941" RadiusY="1.342" RadiusX="0.54">
+            <GradientStop Color="#FF0A54B7" Offset="1"/>
+            <GradientStop Color="#FFA6CFFD"/>
+        </RadialGradientBrush>
+
+        <Style x:Key="ButtonFocusVisual">
 			<Setter Property="Control.Template">
 				<Setter.Value>
 					<ControlTemplate>
@@ -14,25 +32,14 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
-			<GradientStop Color="#F3F3F3" Offset="0"/>
-			<GradientStop Color="#EBEBEB" Offset="0.5"/>
-			<GradientStop Color="#DDDDDD" Offset="0.5"/>
-			<GradientStop Color="#CDCDCD" Offset="1"/>
-		</LinearGradientBrush>
-		<SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
-		<SolidColorBrush x:Key="BrushRoyalBlue" Color="#FF3356B1"/>
-		<RadialGradientBrush x:Key="BrushRoyalBlueGrayRadialGradient" Center="0.508,0.941" GradientOrigin="0.508,0.941" RadiusY="1.342" RadiusX="0.54">
-			<GradientStop Color="#FF0A54B7" Offset="1"/>
-			<GradientStop Color="#FFA6CFFD"/>
-		</RadialGradientBrush>
+        
 		<Style x:Key="ButtonStyleBlueSideTab" TargetType="{x:Type ToggleButton}">
 			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type ToggleButton}">
-						<Border x:Name="Chrome" SnapsToDevicePixels="true" BorderThickness="0,1">
-							<ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" RecognizesAccessKey="True"  />
+                        <Border x:Name="Chrome" SnapsToDevicePixels="true" BorderThickness="0,1" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"  />
 						</Border>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsMouseOver" Value="True" >
@@ -57,8 +64,9 @@
 		</Style>
 
 	</Window.Resources>
+    
 	<DockPanel>
-		<Border BorderBrush="{DynamicResource BrushMediumGray}" BorderThickness="0,0,1,0" Width="125">
+		<Border BorderBrush="{DynamicResource BrushMediumGray}" BorderThickness="0,0,1,0" Width="140">
 			<Grid Margin="0" Background="#FFE9EBEE">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="40"/>
@@ -66,16 +74,16 @@
 					<RowDefinition Height="40"/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<RadioButton Margin="0,2,0,2" Grid.Row="0" Style="{DynamicResource ButtonStyleBlueSideTab}" >
-					<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-						<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Branches</TextBlock>
-					</Grid>
-				</RadioButton>
-				<RadioButton Content="Changes" Margin="0,0,0,2" Grid.Row="1" Style="{DynamicResource ButtonStyleBlueSideTab}" />
-				<RadioButton Content="Remote" Margin="0,0,0,2" Grid.Row="2" Style="{DynamicResource ButtonStyleBlueSideTab}" />
+                <RadioButton Content="Current Branch" Margin="0,2,0,2" Grid.Row="0" Style="{DynamicResource ButtonStyleBlueSideTab}" IsChecked="True" />
+                <RadioButton Content="Local Branches" Margin="0,0,0,2" Grid.Row="1" Style="{DynamicResource ButtonStyleBlueSideTab}" />
+				<RadioButton Content="Remotes" Margin="0,0,0,2" Grid.Row="2" Style="{DynamicResource ButtonStyleBlueSideTab}" />
 			</Grid>
 		</Border>
-		<Frame Content="Frame" Panel.ZIndex="10"/>
-		
-	</DockPanel>
+        <Frame Panel.ZIndex="10">
+            <Frame.Content>
+                <WinGit:PageCurrentBranch />
+            </Frame.Content>
+        </Frame>
+
+    </DockPanel>
 </Window>

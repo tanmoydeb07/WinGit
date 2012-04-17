@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\Theme 1\PageCurrentBranch.xaml.cs">
+      <DependentUpon>PageCurrentBranch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Theme 1\WindowGitT1.xaml.cs">
       <DependentUpon>WindowGitT1.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,10 @@
     <Compile Include="Views\WindowRepo.xaml.cs">
       <DependentUpon>WindowRepo.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Theme 1\PageCurrentBranch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Theme 1\WindowGitT1.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -118,6 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Theme 2\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\refresh_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\database_save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

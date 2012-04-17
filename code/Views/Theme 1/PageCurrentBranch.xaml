@@ -1,0 +1,111 @@
+﻿<Page x:Class="WinGit.Views.Theme_1.PageCurrentBranch"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="830"
+	Title="PageCurrentBranch">
+    
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="BrushRoyalBlue" Color="#FF3356B1"/>
+        <SolidColorBrush x:Key="BrushDirtyYellow" Color="#FFF1CA58"/>
+        <LinearGradientBrush x:Key="BrushYellowWhiteGradient" EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFFDEEB3" Offset="0"/>
+            <GradientStop Color="#FFFDFDEB" Offset="1.25"/>
+        </LinearGradientBrush>
+        
+        <Style x:Key="StyleListBoxChangedFiles" TargetType="ListBox">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"  Value="Center" />
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border x:Name="OuterBorder" SnapsToDevicePixels="true" Padding="0" Margin="-2,0,0,0" CornerRadius="3" BorderThickness="1" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Border x:Name="InnerBorder" SnapsToDevicePixels="true" Padding="5,2,5,2" Margin="0"  CornerRadius="3" BorderThickness="1" BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <TextBlock x:Name="Content" Text="{Binding}" HorizontalAlignment="Stretch" TextAlignment="Left" />
+                            </Border>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True" >
+                                <Setter Property="BorderBrush" TargetName="InnerBorder" Value="White"/>
+                                <Setter Property="BorderBrush" TargetName="OuterBorder" Value="{StaticResource BrushDirtyYellow}"/>
+                                <Setter Property="Background" TargetName="OuterBorder" Value="{StaticResource BrushYellowWhiteGradient}"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding RelativeSource= {RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}},Path=IsSelected}" Value="True">
+                                <Setter Property="Foreground" TargetName="Content"  Value="Black" />
+                                <Setter Property="BorderBrush" TargetName="InnerBorder" Value="Transparent"/>
+                                <Setter Property="BorderBrush" TargetName="OuterBorder" Value="{StaticResource BrushDirtyYellow}"/>
+                                <Setter Property="Background" TargetName="OuterBorder" Value="{StaticResource BrushYellowWhiteGradient}"/>
+                                
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <DataTemplate x:Key="ItemTemplate">
+            <TextBlock Text="{Binding}" Foreground="Red" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="SelectedTemplate">
+            <TextBlock Text="{Binding}" Foreground="White" />
+        </DataTemplate>
+
+        <Style x:Key="StyleListBoxItemContainer"  TargetType="{x:Type ListBoxItem}">
+            <Setter Property="ContentTemplate" Value="{StaticResource ItemTemplate}" />
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="ContentTemplate" Value="{StaticResource SelectedTemplate}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="325" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+            <RowDefinition Height="75" />
+        </Grid.RowDefinitions>
+        
+        <!-- Column Headers -->
+        <TextBlock Name="textBlock1" Text="Changed Files" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0" Margin="10,0,10,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="DimGray" />
+        <TextBlock Name="textBlock2" Text="File Differences" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="0" Margin="10,0,10,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="DimGray" />
+        <Rectangle Height="1" StrokeThickness="1.001" StrokeDashArray="2 2" Stroke="Silver" Grid.Column="0" Grid.Row="0" SnapsToDevicePixels="True" VerticalAlignment="Bottom" Margin="10,0,10,0" RenderOptions.EdgeMode="Aliased" />
+        <Rectangle Height="1" StrokeThickness="1.001" StrokeDashArray="2 2" Stroke="Silver" Grid.Column="1" Grid.Row="0" SnapsToDevicePixels="True" VerticalAlignment="Bottom" Margin="10,0,10,0" RenderOptions.EdgeMode="Aliased" />
+        
+        <!-- Centre Partition -->
+        <Rectangle Height="1" StrokeThickness="1" StrokeDashArray="4 4" Stroke="Silver" Grid.Column="1" Grid.Row="0" SnapsToDevicePixels="True" VerticalAlignment="Bottom" Margin="25,0,10,0" />
+
+        <!-- Content -->
+        <ListBox Name="listBox1"  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,5,10,10" VerticalAlignment="Stretch" Grid.RowSpan="2" ItemsSource="{Binding}" Style="{DynamicResource ResourceKey=StyleListBoxChangedFiles}" ItemContainerStyle="{StaticResource StyleListBoxItemContainer}" />
+        <ListBox Name="listBox2"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,5,10,10" VerticalAlignment="Stretch" Grid.RowSpan="1" />
+        
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Width="85" Height="65" Margin="0,0,10,10" >
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Image Source="..\..\Resources\refresh_32.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,4,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased"/>
+                    <TextBlock Text="Refresh" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0"  />
+                </Grid>
+            </Button>
+            <Button Width="85" Height="65" Margin="0,0,10,10" >
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Image Source="..\..\Resources\database_save.png" Width="32" Height="32" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,4,0,0" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased"/>
+                    <TextBlock Text="Commit" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,40,0,0"  />
+                </Grid>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>
